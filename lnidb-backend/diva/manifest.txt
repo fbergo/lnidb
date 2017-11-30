@@ -1,0 +1,3 @@
+Main-Class: Diva
+Permissions: sandbox
+Codebase: *

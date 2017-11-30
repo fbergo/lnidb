@@ -1,0 +1,211 @@
+body {
+ font-family: sans-serif;
+ font-size: 80%;
+ background-color: white;
+ color: black;
+ margin: 0px 0px 0px 0px;
+}
+p.code { border-style: solid; }
+p {font-family: sans-serif; }
+td {font-family: sans-serif; font-size: 90%; }
+tr.w {color: white; background-color: black; }
+tr.odd {background-color: #dddddd; vertical-align: middle; }
+tr.even {background-color: #eeeeee; vertical-align: middle; }
+tr.odd2 {background-color: #eeeeee; vertical-align: middle; }
+tr.even2 {background-color: #ffffff; vertical-align: middle; }
+tr.title {background-color: #000080; color: white; font-weight: bold; }
+tr.uodd-2 {background-color: #ddcccc; color: #ff0000; font-style: italic; vertical-align: middle; }
+tr.ueven-2 {background-color: #eedddd; color: #ff0000; font-style: italic; vertical-align: middle; }
+tr.uodd0 {background-color: #dddddd; vertical-align: middle; }
+tr.ueven0 {background-color: #eeeeee; vertical-align: middle; }
+tr.uodd1 {background-color: #ccccdd; color: #0000aa; font-weight: bold; vertical-align: middle; }
+tr.ueven1 {background-color: #ddddee; color: #0000aa; font-weight: bold; vertical-align: middle; }
+tr.uodd2 {background-color: #ccddcc; color: #006600; font-weight: bold; vertical-align: middle; }
+tr.ueven2 {background-color: #ddeedd; color: #006600; font-weight: bold; vertical-align: middle; }
+td.s {font-family: sans-serif; font-size: 80%; }
+td.sp {font-family: sans-serif; font-size: 80%; color: #660088; }
+td.diagtitle {background-color: #444444; font-weight: bold; color: white; text-align: center; }
+td.plain{color: black; font-weight: normal;}
+hr { color: black; height: 1px; }
+h1 {font-family: sans-serif; }
+h2 {font-family: sans-serif; margin: 0px 0px 10px 0px;}
+h3 {font-family: sans-serif; }
+a {text-decoration: none; font-family: sans-serif; }
+a:link {color: #0000ff}
+a:visited {color: #0000ff}
+a:hover {color: #0000ff; text-decoration: underline}
+a:active {color: #0000ff}
+a.special:link { color: #ddddee; text-decoration: none; }
+a.special:visited { color: #ddddee; text-decoration: none; }
+a.special:active { color: #ddddee; text-decoration: none; }
+a.w:link { color:white; }
+a.w:visited { color:white; }
+a.w:active { color:white; }
+a.sort { font-size: 80%; }
+a.csort { font-size: 85%; }
+a.sort:link { color: #006600; }
+a.sort:visited { color: #006600; }
+a.sort:active { color: #006600; }
+a.csort:link { color: #006600; font-weight: bold; }
+a.csort:visited { color: #006600; font-weight: bold; }
+a.csort:active { color: #006600; font-weight: bold; }
+pre { font-size: 120%; }
+
+/* main layout */
+.fixed1 { position: fixed; top: 0px; left: 0px; width: 100%; z-index: 5; }
+.fixleft1 { position: fixed; top: 100px; left: 10px; width: 150px; z-index: 6; 
+	   background-color: #2c89a0; padding: 8px; 
+           border-style: solid; border-width: 1px; border-color: black; color: white; }
+.fixleft2 { position: fixed; top: 130px; left: 10px; width: 150px; z-index: 6; 
+	   background-color: #2c89a0; padding: 8px; 
+           border-style: solid; border-width: 1px; border-color: black; color: white; }
+.fixedhisto { position: fixed; top: 100px; left: 177px; z-index: 7; 
+	      background-color: #ffffaa; padding: 6px; border-style: solid; border-width: 1px;
+	      border-color: black; visibility: hidden; }
+.fixdiva { position: fixed; top: 150px; left: 50px; z-index: 12;
+	   background-color: #ffee44; padding: 8px; visibility: hidden;
+           text-align: center; font-size: 100%;
+           border-style: solid; border-width: 1px; border-color: black; color: #73401f; }
+.fixnojava { position: fixed; top: 150px; left: 50px; z-index: 12;
+	     background-color: #ffbbaa; padding: 8px; visibility: hidden;
+             text-align: center; font-size: 100%;
+             border-style: solid; border-width: 1px; border-color: black; color: #440000; }
+a.njlink:link {color: #cc2200; }
+a.njlink:visited {color: #cc2200; }
+a.njlink:hover {color: #cc2200; text-decoration: underline}
+a.njlink:active {color: #cc2200; }
+.fixticker { position: fixed; top: -4px; left: 220px; z-index: 11;
+	     background-color: rgba(0,0,0,0.25); padding: 4px; visibility: hidden;
+	     text-align: left; font-size: 75%; color: white;
+	     border-style: solid; border-width: 1px; border-color: black }
+.tickerarrow { position: fixed; top: 0px; left: 206px; width: 9px; height: 12px; 
+	       background-color: rgba(0,255,0,0.25); padding: 1px 2px 1px 2px; z-index: 13; 
+	       vertical-align: middle; text-align: center;
+	       border-style: solid; border-width: 1px; border-color: black; visibility: hidden }
+
+.histoctl { position: fixed; top: 100px; left: 10px; width: 154px; height: 15px; z-index: 6;
+	   background-color: #ffffaa; padding: 4px 4px 4px 8px; 
+           border-style: solid; border-width: 1px; border-color: black; color: black; }
+.regular  { position: relative; left: +20px; top: +100px; z-index: 4; }
+.regular2 { position: relative; left: +190px; top: +100px; z-index: 4; width: 80%; }
+.print    { z-index: 4; }
+.pbutton  { float:left; padding: 1px 0px 0px 0px; margin: 0px 8px 0px 0px; border-style: outset; 
+            border-color: #707070; border-width: 1px; width: 26px; height: 25px; 
+	    text-align: center; vertical-align: top; background-color: #dddddd}
+.ajuda    { position: relative; left: +150px; top: +100px; width: 500px; z-index: 4; text-align: justify; }
+.darkbg  { position: fixed; top: 0px; left: 0px; width: 100%; height:100%;
+	   z-index: 10; background-color: black; opacity: 0.6; }
+.erro { position: fixed; top: 50px; left: 50px; z-index: 11; 
+	color: #880000; background-color: #ffcccc; border-style: solid; border-width: 4px 4px 4px 20px;
+	padding: 2px 10px 2px 10px; border-color: #cc0000; }
+.notify { position: fixed; top: 50px; left: 50px; z-index: 11; 
+	  color: #008800; background-color: #ccffcc; border-style: solid; border-width: 4px 4px 4px 20px;
+	  padding: 2px 10px 2px 10px; border-color: #008800; }
+.confirmation { position: fixed; top: 50px; left: 50px; z-index: 11; 
+		color: #997700; background-color: #ffffaa; border-style: solid; border-width: 4px 4px 4px 20px;
+		padding: 2px 10px 2px 10px; border-color: #997700; }
+.dlg  { position: fixed; top: 50px; left: 50px; z-index: 11; 
+	color: black; background-color: white; border-style: solid; border-width: 4px 4px 4px 20px;
+	padding: 2px 10px 2px 10px; border-color: #000088; }
+.lefti0 { padding: 4px 2px 4px 12px; background-color: #2c89a0; text-align: left; }
+.lefti1 { padding: 4px 2px 4px 4px; background-color: #b79200; text-align: left; 
+	  border-style: solid; border-width: 0px 0px 0px 8px; border-color: #ffcc00; }
+
+td.sel0 { border-style: solid none none none; border-color: #2c89a0; border-width: 6px;
+          background-color: #2c89a0; color: white; margin: 10px; padding: 2px 10px 2px 10px; 
+          text-align: center; vertical-align: bottom; }
+td.sel1 { border-style: solid none none none; border-color: #ffcc00; border-width: 6px; 
+          background-color: #b79200; color: white; margin: 10px; padding: 2px 10px 2px 10px; 
+          text-align: center; vertical-align: bottom; }
+td.selt0 { border-style: solid none none none; border-color: #887788; border-width: 6px;
+          background-color: #887788; color: white; margin: 10px; padding: 2px 6px 2px 6px; 
+          text-align: center; vertical-align: bottom; }
+td.selt1 { border-style: solid none none none; border-color: #cc00ff; border-width: 6px; 
+          background-color: #9200b7; color: white; margin: 10px; padding: 2px 6px 2px 6px; 
+          text-align: center; vertical-align: bottom; }
+td.curpage { background-color: #ffcc00; }
+.task0 { background-color: #c0c0c0; font-size: 90%; }
+.task1 { background-color: #ffcc66; font-size: 90%; }
+.task2 { background-color: #99ff99; font-size: 90%; }
+.task3 { background-color: #ff9999; font-size: 90%; }
+.task4 { background-color: #9a9fc9; font-size: 90%; }
+.ticker0 { background-color: #c0c0c0; color: black; padding: 0px }
+.ticker1 { background-color: #ffcc66; color: black; padding: 0px }
+.ticker2 { background-color: #99ff99; color: black; padding: 0px }
+.ticker3 { background-color: #ff9999; color: black; padding: 0px }
+.ticker4 { background-color: #9a9fc9; color: black; padding: 0px }
+.tickermore { color: #ffff00; font-style: italic; padding: 0px }
+.warning { background-color: #880000; font-size: 120%; color: white; border-color: #cc0000; border-style: solid;
+           border-width: 2px; margin: 10px; padding: 10px; font-weight: bold; }
+
+.greenlog { background-color: #99ff99; font-size: 100%; }
+.redlog   { background-color: #ff9999; font-size: 100%; }
+
+/* light blue line on top with main menu */
+a.top:link {color: #ffffff}
+a.top:visited {color: #ffffff}
+a.top:hover {color: #ffffff; text-decoration: underline}
+a.top:active {color: #ffffff}
+tr.top { color: white; background-color: #2c89a0; vertical-align: top; }
+table.top { width: 100%; border-style: none; border-width: 0px; border-spacing: 0px; }
+td.top  { border-style: none; border-width: 0px; padding: 0px; }
+td.top0 { border-style: none none solid none; border-color: #2c89a0; border-width: 6px;
+          background-color: #2c89a0; color: white; margin: 10px; padding: 2px 8px 2px 8px; 
+          text-align: center; vertical-align: bottom; white-space: nowrap; }
+td.top1 { border-style: none none solid none; border-color: #ffcc00; border-width: 6px; 
+          background-color: #b79200; color: white; margin: 10px; padding: 2px 8px 2px 8px; 
+          text-align: center; vertical-align: bottom; white-space: nowrap; }
+.histogram { border-style: none;
+             padding: 0px; border-spacing: 0px; margin: 0px; vertical-align: bottom;
+	     text-align: left; }
+
+/* dark blue line with login info */
+a.top2r:link {color: #ffffff; background-color: #cc0000; padding: 3px; border-style: solid; border-width: 1px; border-color: black; }
+a.top2r:visited {color: #ffffff; background-color: #cc0000; padding: 3px; }
+a.top2r:hover {color: #ffffff; text-decoration: underline; background-color: #cc0000; padding: 3px; }
+a.top2r:active {color: #ffffff; background-color: #cc0000; padding: 3px; }
+
+a.top2g:link {color: #ffffff; background-color: #00aa00; padding: 3px; border-style: solid; border-width: 1px; border-color: black; }
+a.top2g:visited {color: #ffffff; background-color: #00aa00; padding: 3px; }
+a.top2g:hover {color: #ffffff; text-decoration: underline; background-color: #00aa00; padding: 3px; }
+a.top2g:active {color: #ffffff; background-color: #00aa00; padding: 3px; }
+
+tr.top2 { color: white; background-color: #1e5d6c; }
+td.top2x {font-family: sans-serif; font-size: 70%; color: #eeeeee; text-align: left; padding: 6px; }
+td.top2 {font-family: sans-serif; font-size: 80%; text-align: right; padding: 6px; }
+table.top2 { width: 100%; border-width: 0px; border-style: none; padding: 0px; border-spacing: 0px; }
+
+td.dkla { color: #444499; background-color: #ddddee; }
+td.dklb { color: #228822; background-color: #ddeedd; }
+
+.chartkey { border-style: solid; border-color: #222222; color: #222222; background-color: #eeeeee; font-size: 80%;
+            border-width: 1px; padding: 4px; width: 600px; }
+
+.dialogbox  { position: fixed; top: 100px; left: 50px; z-index: 12;
+	    background-color: #e8e8c8; color: black; padding: 8px; visibility: hidden;
+            text-align: left; font-size: 100%;
+            border-style: solid; border-width: 2px; border-color: #666644;
+	    box-shadow: 5px 5px 5px #888; }
+
+.rederror { color: #cc0000; font-weight: bold; font-style: italic; font-size: 95%; }
+.debuginfo { color: #999999; font-style: italic; font-size: 75%; }
+span.debuginfo { text-align: right; color: #777799; font-style: italic; font-size: 75%; }
+.opdis { color: #999999; font-style: italic; }
+table.gop { border-style: solid; border-width: 1px; border-color: #999999; padding: 0px; margin: 0px; }
+tr.gop { padding: 0px; margin: 0px; border-style: none; vertical-align: middle; }
+td.admgop { background-color: #f3b493; padding: 2px 12px 2px 12px; margin: 0px; vertical-align: middle; font-size: 70%; }
+td.reggop { background-color: white; padding: 2px 12px 2px 12px; margin: 0px; vertical-align: middle; font-size: 70%; }
+
+table.gstat { border-style: solid; border-width: 1px; border-color: #999999; padding: 0px; margin: 0px; }
+
+td.gstatlabel { vertical-align: middle; font-size: 90%; text-align: right; }
+
+tr.gstat1 { vertical-align: bottom; font-size: 80%; text-align: center; height: 70px; }
+td.gstatup { vertical-align: bottom; font-size: 80%; text-align: center; color: #3939ff; font-weight: bold; }
+
+tr.gstat2 { vertical-align: middle; font-size: 90%; text-align: center; }
+td.gstatmid { vertical-align: middle; font-size: 75%; text-align: center; color: white; background-color: #555555; }
+
+tr.gstat3 { vertical-align: top; font-size: 80%; text-align: center; height: 70px; }
+td.gstatdown { vertical-align: top; font-size: 80%; text-align: center; color: #b04080; font-weight: bold; }
+

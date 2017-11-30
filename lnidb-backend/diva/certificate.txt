@@ -1,0 +1,12 @@
+
+to sign:
+jarsigner diva.jar me
+
+to verify:
+jarsigner -verify -verbose -certs diva.jar
+
+to generate self-signed certificate:
+keytool -genkey -alias me
+keytool -selfcert -alias me -validity 9999
+
+keystore in ~/.keystore, password fuckjava

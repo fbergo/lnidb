@@ -1,0 +1,12 @@
+
+Fontes:
+
+dcm2nii: mricron, www.mccauslandcenter.sc.edu/mricro/mricron
+         current ver: June 2013, http://www.nitrc.org/frs/?group_id=152
+
+scn2ana, scntool, dicom2scn: IVS, www.liv.ic.unicamp.br/~bergo/ivs
+
+nii2mnc, mincreshape: no idea. Freesurfer ? minc ?
+
+splitmri: repositorio privado displasia/tag (bergo)
+

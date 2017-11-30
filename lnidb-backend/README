@@ -1,0 +1,136 @@
+
+0. Sistema
+
+Para uma instalação nova de Fedora 12-14 ou RHEL/CentOS 6:
+
+- desabilitar SELINUX em /etc/sysconfig/selinux (SELINUX=disabled)
+- yum -y install php-pgsql vsftpd postgresql-server
+- inicializar postgresql com service postgresql initdb
+- habilitar postgresql com chkconfig --levels 345 postgresql on
+- editar /etc/ssh/sshd_config, descomentar e mudar PermitRootLogin para No
+- copiar vsftpd.conf para /etc/vsftpd/vsftpd.conf
+- editar /etc/logrotate.conf, monthly, rotate 48
+- habilitar httpd, vsftpd, iptables 
+   chkconfig --levels 345 httpd on
+   chkconfig --levels 345 vsftpd on
+   chkconfig --levels 345 iptables on
+
+1. Banco de dados
+
+Criacao do banco de dados:
+
+service postgresql start 
+
+(como usuario postgres)
+
+createuser lnidb (n/y/n)
+createdb lnidb -O lnidb
+
+Permissoes:
+
+editar /var/lib/pgsql/data/pg_hba.conf para permitir usuario lnidb
+ser autenticado localmente via trust:
+
+local	all	    lnidb		              trust
+
+tuning do BD:
+
+editar /etc/sysctl.conf e adicionar/modificar 
+
+  kernel.shmmax = 2500000000
+
+(nota: no centos/rhel 6 o limite já é maior que isso, manter o default do sistema)
+
+editar /var/lib/pgsql/data/posgresql.conf e aumentar buffers
+
+  shared_buffers = 2GB
+  temp_buffers = 128MB
+
+2. Usuario + FTP + diretorios
+
+(como usuario root)
+
+useradd lnidb -c LNIDB -m
+passwd lnidb (entrar lnidb)
+chmod 0755 /home/lnidb
+mkdir -m 0777 /home/lnidb/importacao
+mkdir -m 0777 /home/lnidb/anexos
+mkdir -m 0755 /home/lnidb2
+mkdir -m 0755 /home/lnidb2/dicom
+mkdir -m 0755 /home/lnidb2/attach
+mkdir -m 0755 /home/lnidb2/basket
+chown -R lnidb:lnidb /home/lnidb2
+chown -R lnidb:lnidb /home/lnidb
+useradd anexo -c "anexos LNIDB" -M -s "/sbin/nologin" -d "/home/lnidb/anexos" 
+passwd anexo (entrar anexo)
+
+CentOS 6: copiar ftp.modules para /etc/sysconfig/modules com mode 0755
+(para carregar o módulo nf_conntrack_ftp)
+
+3. firewall
+
+/etc/sysconfig/iptables
+
+# FTP
+-A INPUT -m state --state NEW -s 143.106.129.0/26 -m tcp -p tcp --dport 20 -j ACCEPT
+-A INPUT -m state --state NEW -s 127.0.0.0/24 -m tcp -p tcp --dport 20 -j ACCEPT
+-A INPUT -m state --state NEW -s 143.106.129.0/26 -m tcp -p tcp --dport 21 -j ACCEPT
+-A INPUT -m state --state NEW -s 127.0.0.0/24 -m tcp -p tcp --dport 21 -j ACCEPT
+# HTTP
+-A INPUT -m state --state NEW -s 143.106.129.0/26 -m tcp -p tcp --dport 80 -j ACCEPT
+-A INPUT -m state --state NEW -s 127.0.0.0/24 -m tcp -p tcp --dport 80 -j ACCEPT
+
+ou use o arquivo iptables.conf como guia
+
+4. Apache
+
+editar /etc/httpd/conf/httpd.conf, editar ServerName
+
+copiar apache_lnidb.conf para /etc/httpd/conf.d, editar conforme adequado
+
+criar arquivo de senhas, htpasswd -c /etc/httpd/conf/lnidb.pwd USUARIO
+
+editar /etc/httpd/conf.d/webalizer.conf, abrir webalizer conforme desejado
+
+instalar mod xsendfile (mod_xsendfile.c) no apache
+
+(fonte: https://tn123.org/mod_xsendfile/ )
+
+yum install httpd-devel
+apxs -cia mod_xsendfile.c
+service httpd restart
+
+5. Arquivos e utilitários do LNIDB
+
+mkdir /var/www/db
+cd /var/www/db
+tar zxvf lnidb-web.tgz -ou- cvs co lnidb-web
+
+backend (em um diretório temporário):
+tar zxvf lnidb-backend.tgz -ou- cvs co lnidb-backend 
+compilar diva:
+  yum install java-1.6.0-openjdk-devel
+  make -C lnidb-backend/diva
+copiar diva:
+  cp lnidb-backend/diva.jar /var/www/db/lnidb-web
+
+Instalar utilitários binários:
+cp lnidb-backend/binutils/{d,m,n,s}* /usr/local/bin
+cp lnidb-backend/lnidbtask.pl /usr/local/bin
+cp lnidb-backend/lnidbtask.sh /etc/rc.d/init.d/lnidbtask
+chkconfig --add lnidbtask
+chkconfig --levels 345 lnidbtask on
+
+6. Inicializar DB
+
+Criar do zero: psql lnidb lnidb -f lnidb-backend/lnidb.sql
+
+Criar de dump: psql lnidb lnidb -f dump.sql
+
+Recriar DB vazio:
+su postgres
+dropdb lnidb
+createdb lnidb -O lnidb
+
+
+

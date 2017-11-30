@@ -1,0 +1,177 @@
+<b>Índice de Seções:</b> <ul>
+1. <a href="#buscas">Buscas</a><br>
+2. <a href="#pacientes">Pacientes</a><br>
+3. <a href="#estudos">Estudos</a><br>
+4. <a href="#cesta">Cesta de Arquivos</a><br>
+5. <a href="#grupos">Grupos de Estudos</a><br>
+6. <a href="#visualizacao">Visualização de Estudos</a><br>
+7. <a href="#seguranca">Segurança e Restrição de Acesso</a><br>
+8. <a href="#compatibilidade">Compatibilidade com Navegadores</a><br>
+9. <a href="#bugs">Bugs/Dúvidas</a>
+</ul>
+
+<a name="buscas"></a>
+<br><img src="trans.png" width=1 height=70><br>
+ <h3>1. Buscas</h3>
+Ao realizar buscas em campos textuais, cuidado ao utilizar apóstrofos, aspas, pontos, asteriscos, 
+interrogação, sinal de mais, parênteses, colchetes,
+chaves ou barra invertida. Estes caracteres têm significado especial: apóstrofos e aspas
+provavelmente causarão erros na busca,
+por serem delimitadores da linguagem interna. O ponto (.) casa com qualquer caractere. O
+asterisco (*) significa casar o último caractere zero ou mais vezes. O mais (+) significa casar o
+último caractere uma ou mais vezes. Por exemplo:
+<ul>
+  <li>ANA.*SILVA casará com qualquer texto que comece como ANA e termine com SILVA.</li>
+  <li>ALES*ANDRO casará com ALEANDRO, ALESANDRO, ALESSANDRO, ALESSSSSANDRO, etc.</li>
+  <li>ALES+ANDRO casará com ALESANDRO, ALESSANDRO, ALESSSSSANDRO, mas não ALEANDRO como acima.</li>
+</ul>
+Os demais caracteres citados acima têm significados especiais. A documentação completa está na
+seção 9.7.3.1 <a href="http://www.postgresql.org/docs/8.4/static/functions-matching.html#FUNCTIONS-POSIX-REGEXP">deste documento</a>, caso tenha interesse. Por exemplo:
+<ul>
+  <li>ALE[XSC]+ANDR[AEO] casará com ALEXANDRE, ALESSANDRO, ALECSANDRA, ALEXXXXANDRO, etc.</li>
+</ul>
+Estas regras não se aplicam a campos numéricos ou datas.
+
+<a name="pacientes"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>2. Pacientes</h3>
+
+Na relação de pacientes, um paciente é definido como uma combinação única
+de Nome, HC, idade e sexo. Um mesmo paciente que tenha feito exames com idades diferentes aparece
+várias vezes na tabela, e isto não é um erro. Alguns pacientes aparecem múltiplas vezes por erros
+de digitação no nome ou HC. Estes erros podem ser corrigidos dentro do sistema.
+<p>
+<strike>Alguns</strike> Vários pacientes da ressonância antiga (2T) não tiveram suas datas de
+nascimento digitadas no momento do exame, e o valor não está presente nos arquivos de imagens. 
+Nestes casos, o sistema coloca a data de nascimento como 1900-01-01 (1º de Janeiro de 1900) e a
+idade informada estará errada. Para pacientes e estudos da ressonância antiga, desconfie da
+idade e verifique a data de nascimento caso esta esteja na faixa de 98-110 anos (1998-2010). 
+
+<a name="estudos"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>3. Estudos</h3>
+
+Os estudos realizados na ressonância antiga (Elscint) não possuem informação de
+espaçamento entre cortes, e a terceira dimensão aparece como -1 na lista de estudos.
+Para estudos sem gap, o valor real será idêntico ao thickness.
+<p>
+Estudos em que o campo "número de colunas da imagem" não está definido não são listados.
+Arquivos não listados são mantidos no servidor, mas não podem ser acessados pela interface
+web do sistema. Estudos de espectroscopia multivoxel e arquivos com meta-dados de
+aquisição são exemplos de arquivos que não serão listados na interface web.
+
+<a name="cesta"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>4. Cesta de Arquivos</h3>
+
+Os pacotes gerados pela cesta de arquivos não serão mantidos
+permanentemente no servidor. Faça o download de seus pacotes assim que
+possível e apague-os.  Pacotes gerados há mais de 10 dias poderão ser
+apagados arbitrariamente pelo sistema para liberar espaço.
+<p>
+Para utilizar o recurso da cesta de arquivos você precisa ter uma conta no sistema e estar logado
+com ela. Estudos compostos por mais de um arquivo só podem ser baixados através da cesta.
+<p>
+Algumas conversões disponíveis no empacotamento podem não fazer
+sentido para alguns tipos de estudo (como tentar converter um DTI para
+MINC, por exemplo).
+
+<a name="grupos"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>5. Grupos de Estudos</h3>
+
+Grupos de estudos (menu Grupos) funcionam como "cestas permanentes", e
+podem ser usados para agrupar estudos, como por exemplo "T1
+volumétrico de controles", "imagens T2 usadas em determinado estudo",
+etc. todo grupo tem um dono/criador, e pode ser colaborativos,
+públicos ou privados.
+
+<ul>
+<li><b>Grupos colaborativos</b> podem ser vistos por
+qualquer usuário logado, e qualquer usuário logado pode adicionar
+estudos ao grupo, ou remover estudos do grupo.</li>
+
+<li><b>Grupos públicos</b> podem ser vistos por qualquer usuário logado,
+mas apenas o criador do grupo pode adicionar ou remover estudos.</li>
+
+<li><b>Grupos privados</b> podem ser vistos e modificados, inicialmente,
+apenas pelo criador. O criador tem a opção de dar permissão de visualização e/ou
+modificação a outros usuários, um a um.</li>
+</ul>
+
+Grupos de estudos não ocupam espaço no servidor (não é feita cópia adicional dos estudos),
+ao contrário de cestas empacotadas. Para adicionar estudos a um grupo, adicione-os à cesta,
+e use o botão de transferência da cesta na página de detalhes do grupo.
+
+<a name="visualizacao"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>6. Visualização de Estudos</h3>
+
+O botão <img src="bview.png"> abre um estudo para visualização rápida
+através de uma applet Java (DIVA - <i>Dicom Image Viewer Applet</i>). Para
+que funcione corretamente é necessário que Java 1.6.0 ou mais recente
+esteja instalado no computador, o plugin Java esteja instalado no seu
+navegador, e que Java esteja habilitado no navegador.
+<p>
+Applets Java têm limitações de uso de memória, e o applet poderá não funcionar para
+estudos muito grandes (acima de 80 MB). Em particular, a visualização de DTI, fMRI e
+estudos volumétricos de alta resolução (como alguns T1 volumétricos de 0.45 mm adquiridos 
+experimentalmente) provavelmente será problemática.
+<p>
+Na Applet, os parâmetros de visualização (janela de intensidades, exibição de cursor/orientação, zoom e pan)
+podem ser modificados pelos controles na barra à direita da tela. A orientação exibida é extraída do
+arquivo DICOM, e pode alternar entre convenção neurológica ou radiológica de acordo com a programação
+de cada estudo. Em estudos com angulações próximas de 45 graus, é possível que o applet não exiba a
+orientação nos eixos afetados. As orientações podem estar incorretas para:
+
+<ul>
+<li>Pacientes que não foram escaneados em posição normal (deitado de costas, olhando para cima).</li>
+<li>Séries multi-plano (como os pré-scans de 3 planos usados para localizar os estudos subsequentes)</li>
+</ul>
+
+As seguintes teclas podem ser utilizadas para controlar a visualização:
+
+<ul>
+<li>Setas para cima/baixo: controlam o contraste/intensidade.</li>
+<li>Setas para esquerda/direita: navegam nas fatias do quadro ativo (borda amarela).</li>
+<li>Barra de espaço: alterna o quadro ativo.</li>
+<li>C: ativa/desativa exibição do cursor e orientação.</li>
+<li>I: ativa/desativa exibição isométrica.</li>
+</ul>
+
+<a name="seguranca"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>7. Segurança e Restrição de Acesso</h3>
+
+O acesso a este sistema está restrito aos micros fixos do LNI. O sistema não pode ser acessado
+a partir de notebooks que se conectam à Internet pelo proxy do HC. 
+<p>
+As contas internas do sistema LNIDB permitem que os usuários adicionem comentários aos pacientes,
+editem dados de pacientes, importem discos DICOM para o banco de dados, e usem a função de cesta
+para agrupar estudos para download. <b>As senhas deste sistema trafegam pela rede de forma não 
+criptografada</b> e podem ser descobertas com relativa facilidade. <b>Não reutilize senhas de sistemas
+importantes</b> (email, banco, outros computadores do LNI).
+<p>
+Se você não tem conta no sistema, solicite a criação a Felipe ou Fabrício no LNI.
+
+<a name="compatibilidade"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>8. Compatibilidade com Navegadores</h3>
+
+<ul>
+<li><b>Firefox 3.5/3.6 - Testado, funcionamento ok, recomendado.</b></li>
+<li><b>Opera 10.60 - Testado, funcionamento ok. No Linux, problemas com plugin Java (afeta apenas a visualização via Diva)</b></li>
+<li>Internet Explorer 8 - Testado, apresenta alguns problemas de renderização (fundos transparentes não são suportados). Evite.</li>
+<li>Apple Safari - Não testado.</li>
+<li><b>Google Chrome 7 - Testado, funcionamento ok, recomendado.</b></li>
+</ul>
+
+<a name="bugs"></a>
+<br><img src="trans.png" width=1 height=70><br>
+<h3>9. Bugs/Dúvidas</h3>
+
+Se você encontrar algum problema com o banco de dados ou sua utilização, contate Felipe Bergo
+pelo email fbergo@gmail.com.
+
+<p>
+<font color=red>Última atualização desta Ajuda: 27 de abril de 2012.</font>
