@@ -14,14 +14,14 @@ sob licença BSD-like.
 LNIDB roda em servidores Linux, e está escrito em PHP, Perl e Java, e
 usa o PostgreSQL como backend de banco de dados. Ele foi originalmente
 desenvolvido em um servidor com Fedora Linux 13 e posteriormente
-desenvolvido em Fedora 14 e CentOS 6. Embora seja possível usá-lo em
-distribuições mais recentes, as instruções para instalação dos
-serviços em sistemas mais novos baseados em systemd devem diferir um
-pouco.
+transferido para sistemas com Fedora 14 e CentOS 6. Embora seja
+possível usá-lo em distribuições mais recentes, as instruções para
+instalação dos serviços em sistemas mais novos baseados em systemd
+devem diferir um pouco.
 
 O código-fonte e os arquivos de configuração provavelmente contêm IPs
 da rede interna do LNI (143.106.129.42 era o IP do servidor original,
-143.106.129.0/26 a sub-rede). A instação em redes diferentes deve
+143.106.129.0/26 a sub-rede). A instalação em redes diferentes deve
 exigir atenção com os endereços.
 
 Diretórios:
