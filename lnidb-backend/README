@@ -103,11 +103,8 @@ service httpd restart
 5. Arquivos e utilitários do LNIDB
 
 mkdir /var/www/db
-cd /var/www/db
-tar zxvf lnidb-web.tgz -ou- cvs co lnidb-web
+cp -r lnidb-web /var/www/db
 
-backend (em um diretório temporário):
-tar zxvf lnidb-backend.tgz -ou- cvs co lnidb-backend 
 compilar diva:
   yum install java-1.6.0-openjdk-devel
   make -C lnidb-backend/diva
@@ -131,6 +128,5 @@ Recriar DB vazio:
 su postgres
 dropdb lnidb
 createdb lnidb -O lnidb
-
 
 
