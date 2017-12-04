@@ -51,9 +51,6 @@ lnidb-backend/scripts: scripts em Perl para manutenção do backend.
 
 lnidb-web: contém a interface web exposta aos usuários, escrita em PHP e Javascript.
 
-lnidb-frontend: contém um mock-up de um cliente Java stand-alone para
-o sistema (bem incompleto e não-utilizável).
-
 As instruções de instalação do sistema então em lnidb-backend/README
 
 Novembro, 2017.

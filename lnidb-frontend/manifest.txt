@@ -1,2 +1,0 @@
-Main-Class: ViewerMain
-Class-Path: httpclient-4.4.jar httpcore-4.4.jar commons-logging-1.2.jar commons-codec-1.9.jar fluent-hc-4.4.jar commons-lang3-3.3.2.jar
