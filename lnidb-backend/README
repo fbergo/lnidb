@@ -3,9 +3,12 @@
 
 Para uma instalação nova de Fedora 12-14 ou RHEL/CentOS 6:
 
+Instalação de pacotes requeridos:
+- yum -y install gcc make php php-pgsql vsftpd postgresql-server postgresql
+- yum -y install perl perl-DBI perl-DBD-Pg httpd httpd-devel java-1.6.0-openjdk-devel
+
 - desabilitar SELINUX em /etc/sysconfig/selinux (SELINUX=disabled)
-- yum -y install php-pgsql vsftpd postgresql-server
-- inicializar postgresql com service postgresql initdb
+- inicializar postgresql com: service postgresql initdb
 - habilitar postgresql com chkconfig --levels 345 postgresql on
 - editar /etc/ssh/sshd_config, descomentar e mudar PermitRootLogin para No
 - copiar vsftpd.conf para /etc/vsftpd/vsftpd.conf
@@ -21,7 +24,7 @@ Criacao do banco de dados:
 
 service postgresql start 
 
-(como usuario postgres)
+(como usuario postgres, "su postgres")
 
 createuser lnidb (n/y/n)
 createdb lnidb -O lnidb
@@ -96,7 +99,6 @@ instalar mod xsendfile (mod_xsendfile.c) no apache
 
 (fonte: https://tn123.org/mod_xsendfile/ )
 
-yum install httpd-devel
 apxs -cia mod_xsendfile.c
 service httpd restart
 
@@ -106,7 +108,6 @@ mkdir /var/www/db
 cp -r lnidb-web /var/www/db
 
 compilar diva:
-  yum install java-1.6.0-openjdk-devel
   make -C lnidb-backend/diva
 copiar diva:
   cp lnidb-backend/diva.jar /var/www/db/lnidb-web
@@ -120,6 +121,9 @@ chkconfig --levels 345 lnidbtask on
 
 6. Inicializar DB
 
+(se você ainda não rebootou o sistema após editar o pg_hba.conf, 
+reinicie o BD para aplicar a configuração: "service postgresql restart")
+
 Criar do zero: psql lnidb lnidb -f lnidb-backend/lnidb.sql
 
 Criar de dump: psql lnidb lnidb -f dump.sql
@@ -129,4 +133,5 @@ su postgres
 dropdb lnidb
 createdb lnidb -O lnidb
 
+(procedimento acima testado em instalação limpa "minimal desktop" do CentOS 6.9)
 
